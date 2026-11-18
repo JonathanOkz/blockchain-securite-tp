@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Blockchain sécurité · Le laboratoire</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%232347d8'/%3E%3Ctext x='8' y='24' font-family='Arial' font-weight='800' font-size='22' fill='white'%3Eb.%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#mission-1" aria-label="Blockchain sécurité, accueil"><span class="brandmark">b.</span><span class="brand-text">Blockchain <strong>sécurité</strong></span></a>
+    <div class="top-progress" aria-label="Progression du parcours"><span id="progress-text">0 / 5 missions</span><span class="progress-track"><i id="progress-bar"></i></span></div>
+    <div class="top-actions">
+      <a class="button ghost" id="notion-link" href="#" hidden target="_blank" rel="noopener">Cours Notion <span aria-hidden="true">↗</span></a>
+      <button class="button ghost" id="export" type="button">Exporter mes observations</button>
+      <div class="wallet-wrap">
+        <button class="wallet-chip" id="wallet" type="button" aria-haspopup="true" aria-expanded="false"></button>
+        <div class="wallet-menu" id="wallet-menu" hidden></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside>
+      <p class="eyebrow">Votre parcours</p>
+      <nav aria-label="Missions" id="missions"></nav>
+      <div class="method">
+        <p class="eyebrow">La méthode</p>
+        <ol><li><b>Observer</b> le fonctionnement normal</li><li><b>Attaquer</b> pour prouver la faille</li><li><b>Vérifier</b> la version corrigée</li></ol>
+      </div>
+    </aside>
+
+    <main>
+      <section class="intro">
+        <p class="eyebrow accent" id="mission-number"></p>
+        <h1 id="mission-title"></h1>
+        <p class="lead" id="mission-lead"></p>
+        <p class="goal" id="mission-goal-wrap"><span class="goal-icon" aria-hidden="true">◎</span><span><b>Votre mission.</b> <span id="mission-goal"></span></span></p>
+      </section>
+
+      <ol class="stepper" id="stepper" aria-label="Étapes de la mission"></ol>
+      <section class="step-card" id="step-card" aria-live="polite"></section>
+
+      <section id="workspace" class="work-grid" hidden>
+        <section class="panel application">
+          <div class="panel-heading"><span class="tag">Application</span><span class="pill" id="app-kind"></span></div>
+          <h2 id="app-title"></h2>
+          <p id="app-help" class="muted"></p>
+          <div id="app-hero"></div>
+          <div id="app-controls" class="app-controls"></div>
+          <div id="app-state" class="state-grid"></div>
+        </section>
+        <section class="panel inspector">
+          <div class="panel-heading"><span class="tag">Inspecteur</span><span class="pill">Accès direct au contrat</span></div>
+          <h2>Appelez n’importe quelle fonction</h2>
+          <p class="muted">L’interface ne décide pas de vos droits. Le contrat doit les vérifier à chaque appel.</p>
+          <label for="function">Fonction</label>
+          <select id="function"></select>
+          <div id="arguments"></div>
+          <button class="button dark block" id="send" type="button">Envoyer l’appel →</button>
+          <div id="read-result" class="read-result" hidden></div>
+        </section>
+      </section>
+
+      <div class="lower-grid" id="lower">
+        <section class="panel evidence">
+          <div class="panel-heading"><span class="tag">Preuves</span><button id="refresh" class="button ghost small" type="button">Actualiser ↻</button></div>
+          <h2>Ce qui s’est réellement passé</h2>
+          <p class="muted">Chaque appel est lu sur le réseau, avec ce qu’il a changé. Un refus est aussi une preuve.</p>
+          <div id="history"></div>
+        </section>
+        <section class="panel notebook">
+          <div class="panel-heading"><span class="tag">Carnet d’enquête</span></div>
+          <h2>Quelle règle ne tient pas ?</h2>
+          <p id="security-question" class="question"></p>
+          <details class="code"><summary>Voir le code utile <span class="code-variant" id="code-variant"></span></summary><pre><code id="source"></code></pre></details>
+          <div id="hints"></div>
+          <label for="hypothesis">Votre hypothèse</label>
+          <textarea id="hypothesis" placeholder="Je pense que… Pour le vérifier, je vais…" rows="3"></textarea>
+          <label for="conclusion">Votre conclusion</label>
+          <textarea id="conclusion" placeholder="J’ai observé… L’impact est… Le contrôle à ajouter est…" rows="3"></textarea>
+          <p class="small muted">Enregistré dans ce navigateur pour votre compte. Exportez avant de changer d’ordinateur.</p>
+        </section>
+      </div>
+
+      <footer><span>Blockchain sécurité · Cinq missions, une méthode.</span><span>Réseau BaaS privé · Transactions sans frais de gas.</span></footer>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

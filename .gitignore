@@ -1,0 +1,6 @@
+# Seuls le site et la documentation sont publiés.
+/*
+!/site/
+!/README.md
+!/.gitignore
+.DS_Store

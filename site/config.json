@@ -1,0 +1,9 @@
+{
+  "factory": "0x3FBC5bb5dDe961b97D78c9E2a437eA78952029de",
+  "chainId": 5270950013,
+  "rpc": "https://euro-information.rpc.baas.sh",
+  "notionUrl": "https://app.notion.com/p/41bd3a87a1e5818c80f4ecfcb284f0ba",
+  "token": "0xb9E4bf44b7fA50c501C4dB060715E69491e1c992",
+  "replayFactory": "0x6D31A878c8002B7d01B99D3914eCc1B5791be139",
+  "sandwichFactory": "0xd541A706DAD1DCC72Aad3661C8eDE31A79E8A4e1"
+}
