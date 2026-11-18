@@ -15,7 +15,9 @@ Chaque mission suit trois étapes : **fonctionnement normal**, **attaque**, **ve
 Il vous faut :
 
 - un navigateur avec l’extension [MetaMask](https://metamask.io/download/) ;
-- **Python 3** (déjà présent sur macOS et la plupart des Linux) **ou** [Node.js](https://nodejs.org/).
+- [Node.js](https://nodejs.org/) version 18 ou plus récente (npm est installé avec Node.js).
+
+Aucune dépendance à installer : pas besoin de `npm install`.
 
 ### 1. Récupérer le site
 
@@ -26,24 +28,10 @@ cd blockchain-securite-tp
 
 Sans Git : bouton **Code → Download ZIP** sur cette page, puis décompressez le dossier et ouvrez un terminal dedans.
 
-### 2. Démarrer le serveur local
-
-macOS / Linux :
+### 2. Démarrer le laboratoire
 
 ```bash
-python3 -m http.server 8000 --directory site
-```
-
-Windows :
-
-```bash
-py -m http.server 8000 --directory site
-```
-
-Avec Node.js, sur tous les systèmes :
-
-```bash
-npx serve site -l 8000
+npm run dev
 ```
 
 ### 3. Ouvrir le laboratoire
@@ -58,18 +46,21 @@ Si MetaMask n’est pas sur le bon réseau, cliquez sur **Passer sur le réseau 
 | Chain ID | 5270950013 |
 | RPC | https://euro-information.rpc.baas.sh |
 
-Laissez le terminal ouvert pendant la séance. Pour arrêter le serveur : `Ctrl + C`.
+Laissez le terminal ouvert pendant la séance. Pour arrêter le laboratoire : `Ctrl + C`.
 
 ## Bon à savoir
 
-- **Double-cliquer sur `index.html` ne fonctionne pas** : le navigateur bloque les modules JavaScript ouverts depuis le disque. Passez toujours par le serveur local.
-- **Votre progression** (étapes validées, notes, instances) est enregistrée dans votre navigateur, pour votre compte MetaMask. Gardez la même adresse (`http://localhost:8000`) d’une séance à l’autre pour la retrouver.
+- **Double-cliquer sur `index.html` ne fonctionne pas** : le navigateur bloque les modules JavaScript ouverts depuis le disque. Passez toujours par `npm run dev`.
+- **Le port 8000 est déjà utilisé ?** Le laboratoire tourne peut-être déjà dans un autre terminal. Fermez-le, ou choisissez un autre port : `npm run dev -- --port 8001`, puis ouvrez http://localhost:8001.
+- **Votre progression** (étapes validées, notes, instances) est enregistrée dans votre navigateur, pour votre compte MetaMask. Elle est liée à l’adresse : gardez `http://localhost:8000` d’une séance à l’autre pour la retrouver.
 - **Exporter mes observations** télécharge un fichier JSON avec vos notes et vos transactions : c’est ce que vous rendez.
 - Les transactions sont réelles, mais sur un réseau privé de test : aucun fonds réel n’est en jeu.
 
 ## Contenu
 
 ```
+package.json            commande npm run dev
+server.mjs              serveur local, sans dépendance
 site/
 ├── index.html          page du laboratoire
 ├── app.js              logique des missions et appels aux contrats

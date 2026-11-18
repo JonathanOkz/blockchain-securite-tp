@@ -1,0 +1,14 @@
+{
+  "name": "blockchain-securite-tp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Laboratoire de cybersécurité blockchain : cinq missions MetaMask à lancer en local",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

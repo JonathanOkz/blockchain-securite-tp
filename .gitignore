@@ -1,6 +1,8 @@
-# Seuls le site et la documentation sont publiés.
+# Seuls le site, le serveur local et la documentation sont publiés.
 /*
 !/site/
 !/README.md
+!/package.json
+!/server.mjs
 !/.gitignore
 .DS_Store
