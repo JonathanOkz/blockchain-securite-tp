@@ -206,6 +206,10 @@ h2 { font-size: 19px; letter-spacing: -.4px; margin: 0 0 8px; line-height: 1.3; 
 .addr b { font-size: 14px; font-weight: 700; }
 .addr code { font-size: 11px; color: var(--muted); font-weight: 500; letter-spacing: 0; }
 .addr.none { color: var(--muted); font-size: 14px; }
+.registry-row { display: flex; align-items: baseline; gap: 8px; font-size: 14px; }
+.registry-row + .registry-row { margin-top: 4px; }
+.registry-row span { color: var(--muted); font-weight: 500; }
+.registry-row code { font-size: 12px; color: var(--muted); font-weight: 500; letter-spacing: 0; }
 .state-card .value code { font-size: 12px; }
 .loading { padding: 10px 0; }
 

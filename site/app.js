@@ -67,8 +67,7 @@ const missions = [
       { key: 'durandCredits', label: 'Reçu par Lucas Durand', type: 'usdt', tone: s => Number(s.durandCredits) > 0 ? 'loss' : '' },
       { key: 'paidTo', label: 'Paiement envoyé à', type: 'address' },
       { key: 'paidNameHash', label: 'Au nom de', type: 'name' },
-      { key: 'legitimateRecipient', label: 'Atelier Martin', type: 'address' },
-      { key: 'otherRecipient', label: 'Lucas Durand', type: 'address' },
+      { key: 'legitimateRecipient', label: 'Registre des bénéficiaires', type: 'registry', wide: true },
       { key: 'root', label: 'Racine du registre', type: 'hash', wide: true },
       { key: 'contractCredits', label: 'USDT dans le contrat', type: 'usdt', hidden: true }
     ]
@@ -278,6 +277,7 @@ function formatValue(type, value, book) {
     const label = book[String(value).toLowerCase()];
     return `<span class="addr">${label ? `<b>${esc(label)}</b>` : '<b>Adresse inconnue</b>'}<code title="${esc(value)}">${esc(short(value))}</code></span>`;
   }
+  if (type === 'registry') return [[value?.legitimateRecipient, 'Atelier Martin'], [value?.otherRecipient, 'Lucas Durand']].map(([a, n]) => `<span class="registry-row"><b>${esc(n)}</b><span aria-hidden="true">→</span><code title="${esc(a || '')}">${a ? esc(short(a)) : '—'}</code></span>`).join('');
   if (type === 'usdt') return `${esc(number(value))} <small>USDT</small>`;
   if (type === 'dex') return `${esc(number(value, 2))} <small>DEX</small>`;
   if (type === 'bool') return value ? 'Oui' : 'Non';
@@ -508,7 +508,7 @@ function paintAppState() {
   // Les actions déjà consommées sont signalées (l'inspecteur reste libre pour tester un refus).
   if ($('normal-pay')) { const paid = s.paidTo && s.paidTo !== ZERO; $('normal-pay').classList.toggle('spent', !!paid); $('normal-pay').textContent = paid ? 'Facture déjà payée ✓' : 'Payer la facture · 10 USDT'; }
   if ($('normal-withdraw')) { const spent = Number(s.entitlement) === 0; $('normal-withdraw').classList.toggle('spent', spent); $('normal-withdraw').textContent = spent ? 'Droit déjà utilisé ✓' : 'Retirer 1 USDT'; }
-  $('app-state').innerHTML = missions[current].fields.filter(f => !f.hidden).map(f => `<div class="state-card ${f.wide ? 'wide' : ''} ${f.tone ? f.tone(s) : ''}"><span class="label">${esc(f.label)}</span><div class="value">${formatValue(f.type, s[f.key], book)}</div></div>`).join('');
+  $('app-state').innerHTML = missions[current].fields.filter(f => !f.hidden).map(f => `<div class="state-card ${f.wide ? 'wide' : ''} ${f.tone ? f.tone(s) : ''}"><span class="label">${esc(f.label)}</span><div class="value">${formatValue(f.type, f.type === 'registry' ? s : s[f.key], book)}</div></div>`).join('');
 }
 
 function buildControls() {
@@ -780,7 +780,7 @@ async function runGuide() {
 function diffRows(e) {
   if (!e.before || !e.after) return '';
   const book = addressBook(e.after);
-  const rows = missions[e.kind].fields.filter(f => serialize(e.before[f.key]) !== serialize(e.after[f.key]));
+  const rows = missions[e.kind].fields.filter(f => f.type !== 'registry' && serialize(e.before[f.key]) !== serialize(e.after[f.key]));
   if (!rows.length) return '<p class="nochange">Aucun changement d’état.</p>';
   return `<ul class="diff">${rows.map(f => `<li><span>${esc(f.label)}</span><span class="from">${formatValue(f.type, e.before[f.key], book)}</span><span class="arrow">→</span><span class="to">${formatValue(f.type, e.after[f.key], book)}</span></li>`).join('')}</ul>`;
 }
